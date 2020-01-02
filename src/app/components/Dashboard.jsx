@@ -5,13 +5,17 @@ import {ConnectedSkillsList} from "./SkillsList";
 export const Dashboard = ({ engineers }) => (
     <div>
         <h2>Dashboard</h2>
-        {engineers.map(engineer => (<ConnectedSkillsList id={engineer.id} name={engineer.name}/>))}
+        {engineers.map(engineer => (<ConnectedSkillsList key={engineer.id} id={engineer.id} name={engineer.name}/>))}
     </div>
 )
 
 function mapStateToProps(state){
+    const engineers = state.engineers;
     return{
-        engineers: state.users.filter(user => user.role === "engineer"),
+        engineers: engineers.map((eng) => {
+            eng.name = state.users.find(user => user.id === eng.user).name;
+            return eng;
+            }),
     }
 }
 
