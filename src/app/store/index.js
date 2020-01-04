@@ -4,9 +4,9 @@ import { createLogger } from "redux-logger";
 import createSagaMiddleware from "redux-saga";
 
 const sagaMiddleware = createSagaMiddleware();
-//import {skillAddationSaga}  from "./sagas.mock";
+//import {skillAddationSaga}  from "./sagas";
 
-import * as sagas from "./sagas.mock";
+import * as sagas from "./sagas";
 import * as mutations from "./mutations";
 import { TASK } from "redux-saga/utils";
 
