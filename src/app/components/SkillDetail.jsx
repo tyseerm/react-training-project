@@ -4,18 +4,18 @@ import {Link} from "react-router-dom";
 import * as mutations from "../store/mutations";
 
 const SkillDetail = ({ id, skill, setSkillName, setSkillYears}) => (
-  <div>
+  <div className="card p-3 col-6">
     <h1>{skill.name}</h1>
-    <div>
+    <div className="form-group">
       <label htmlFor="skillName">Skill Name</label>
-      <input name="skillName" onChange={setSkillName} type="text" value={skill.name} />
+      <input id="skillName" onChange={setSkillName} type="text" value={skill.name} className="form-control form-control-lg"/>
     </div>
-    <div>
+    <div className="form-group">
       <label htmlFor="years">Years of Experince</label>
-      <input name="years" onChange={setSkillYears} type="text" value={skill.years} />
+      <input id="years" onChange={setSkillYears} type="text" value={skill.years} className="form-control form-control-lg"/>
     </div>
     <Link to="/Dashboard">
-        <button>Done</button>
+        <button className="btn btn-primary">Done</button>
     </Link>
   </div>
 );

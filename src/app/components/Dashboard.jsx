@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import {ConnectedSkillsList} from "./SkillsList";
 
 export const Dashboard = ({ engineers }) => (
-    <div>
-        <h2>Dashboard</h2>
-        {engineers.map(engineer => (<ConnectedSkillsList key={engineer.id} id={engineer.id} name={engineer.name}/>))}
+    <div className="row">
+        {engineers.map(engineer => (<ConnectedSkillsList key={engineer.id} id={engineer.id} name={engineer.name} className="col"/>))}
     </div>
 )
 

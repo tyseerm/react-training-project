@@ -12,8 +12,24 @@ import { TASK } from "redux-saga/utils";
 
 export const store = createStore(
   combineReducers({
-    skills(skills = defaultState.skills, action) {
+    session(userSession = defaultState.session || {}, action){
+        let {type, authenticated, session} = action;
+        
+        switch(type){
+            case mutations.SET_STATE:
+                return {...userSession, id: action.state.session.id};
+            case mutations.REQUEST_AUTHENTICATE_USER:
+                return {...userSession, authenticated: mutations.AUTHENTICATING};
+            case mutations.PROCESSING_AUTHENTICATE_USER:
+                return {...userSession, authenticated};
+            default:
+                return userSession;
+        }
+    },
+    skills(skills = [], action) {
       switch (action.type) {
+        case mutations.SET_STATE:
+            return action.state.skills;
         case mutations.ADD_SKILL:
           return [
             ...skills,
@@ -39,13 +55,21 @@ export const store = createStore(
       }
       return skills;
     },
-    users(users = defaultState.users) {
+    users(users = [], action) {
+      switch(action.type){
+          case mutations.SET_STATE:
+              return action.state.users;
+      }  
       return users;
     },
-    engineers(engineers = defaultState.engineers) {
+    engineers(engineers = [], action) {
+        switch(action.type){
+            case mutations.SET_STATE:
+                return action.state.engineers;
+        }
       return engineers;
     },
-    profiles(profiles = defaultState.profiles) {
+    profiles(profiles = []) {
       return profiles;
     }
   }),

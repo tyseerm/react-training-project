@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { connectDB } from "./connect-db";
+import "./initialize-db";
+import {authenticationRoute} from  "./authenticate";
 
 const port = 7777;
 let app = express();
@@ -9,6 +11,8 @@ let app = express();
 app.listen(port, console.log("server listening on port:", port));
 
 app.use(cors(), bodyParser.urlencoded({extended:true}), bodyParser.json());
+
+authenticationRoute(app);
 
 export const addNewSkill = async (skill) => {
     let db = await connectDB();
